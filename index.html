@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d3552" />
+  <title>IELTS REP - Real Exam Passages</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* Navbar */
+    .navbar {
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 16px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+    }
+    .logo-text span { display: block; }
+    .logo-text .small { font-size: 10px; color: #64748b; line-height: 1.1; }
+    .logo-text .big { font-size: 13px; font-weight: 700; color: #0d3552; line-height: 1.1; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0d3552 0%, #1a5276 100%);
+      color: #fff;
+      padding: 32px 16px 40px;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: #2563eb;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      transform: rotate(-2deg);
+    }
+    .hero h1 {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .hero h1 .orange { color: #fb923c; }
+    .hero p {
+      font-size: 14px;
+      color: #bfdbfe;
+      margin-bottom: 20px;
+      max-width: 340px;
+    }
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f59e0b;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 12px 24px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(245,158,11,0.4);
+    }
+    .btn-start:active { transform: scale(0.97); }
+    .features-list {
+      margin-top: 24px;
+      display: grid;
+      gap: 8px;
+    }
+    .features-list div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #e0f2fe;
+    }
+    .features-list .check { color: #4ade80; font-weight: 700; }
+
+    /* Section */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 16px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .section-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-header p {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    /* Test cards */
+    .tests-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 640px) {
+      .tests-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .tests-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .test-card {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .test-card-img {
+      height: 110px;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      position: relative;
+    }
+    .badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      color: #fff;
+    }
+    .badge-free { background: #22c55e; }
+    .badge-prime { background: #f59e0b; }
+    .test-card-body { padding: 12px; }
+    .test-card-body h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+    .test-card-body .title {
+      font-size: 11px;
+      color: #64748b;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 32px;
+    }
+    .test-card-body .meta {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-bottom: 10px;
+    }
+    .btn-test {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-free {
+      background: #0d3552;
+      color: #fff;
+    }
+    .btn-locked {
+      background: #f1f5f9;
+      color: #94a3b8;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Prime Banner */
+    .prime-banner {
+      background: linear-gradient(135deg, #0d3552, #1a5276);
+      border-radius: 16px;
+      padding: 24px 20px;
+      color: #fff;
+      margin: 8px 0 24px;
+    }
+    .prime-banner h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .prime-banner h3 .orange { color: #fb923c; }
+    .prime-banner .desc {
+      font-size: 13px;
+      color: #bfdbfe;
+      margin-bottom: 12px;
+    }
+    .prime-checks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 12px;
+      color: #e0f2fe;
+      margin-bottom: 16px;
+    }
+    .price-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .price {
+      background: rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 10px 18px;
+      text-align: center;
+    }
+    .price .amount { font-size: 28px; font-weight: 800; }
+    .price .label { font-size: 11px; color: #bfdbfe; }
+    .btn-unlock {
+      background: #f59e0b;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 22px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(245,158,11,0.35);
+    }
+
+    /* Payment Section */
+    .payment-section {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      padding: 24px 16px;
+      margin-bottom: 28px;
+    }
+    .payment-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .payment-section .sub {
+      text-align: center;
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 20px;
+    }
+    .bangla-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0d3552;
+      margin-bottom: 16px;
+    }
+    .number-box {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 14px;
+      padding: 20px 16px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .number-box .label {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+    .number-box .number {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0d3552;
+      letter-spacing: 1px;
+      margin: 8px 0;
+    }
+    .number-box .amount {
+      font-size: 14px;
+      color: #475569;
+      margin-bottom: 12px;
+    }
+    .btn-copy {
+      background: #0d3552;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-copy.copied {
+      background: #16a34a;
+    }
+    .steps {
+      font-size: 13px;
+      color: #475569;
+      padding-left: 4px;
+    }
+    .steps li {
+      margin-bottom: 6px;
+      list-style: decimal;
+      margin-left: 18px;
+    }
+    .warning {
+      font-size: 12px;
+      color: #dc2626;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    /* Features bottom */
+    .features-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      text-align: center;
+      padding: 8px 0 32px;
+    }
+    @media (min-width: 640px) {
+      .features-bottom { grid-template-columns: repeat(5, 1fr); }
+    }
+    .feat-item .icon { font-size: 24px; margin-bottom: 6px; }
+    .feat-item h4 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .feat-item p { font-size: 11px; color: #64748b; }
+
+    /* Footer */
+    footer {
+      background: #0d3552;
+      color: #e0f2fe;
+      padding: 28px 16px 20px;
+      text-align: center;
+    }
+    footer .logo-f {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    footer .logo-f img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+    }
+    footer p { font-size: 12px; color: #94a3b8; margin-top: 12px; }
+
+    /* Show more */
+    .show-more-wrap {
+      text-align: center;
+      margin-top: 16px;
+    }
+    .btn-more {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      color: #0d3552;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+
+    /* Full Test / Single Test tabs */
+    .rtabs{display:flex;gap:10px;margin-bottom:16px}
+    .rtab{flex:1;border:2px solid #e2e8f0;background:#fff;color:#0f172a;border-radius:14px;padding:12px 8px;font-weight:800;font-size:14px;cursor:pointer;text-align:center;font-family:inherit}
+    .rtab small{display:block;font-weight:500;font-size:11px;color:#64748b}
+    .rtab.on{border-color:#f59e0b;background:linear-gradient(135deg,#fffbeb,#fef3c7);color:#78350f}
+    .rtab.on small{color:#92400e}
+    .test-card.fulltest{border:2px solid #f59e0b}
+    .test-card-img.fullimg{height:auto;aspect-ratio:3/2;background-size:cover;background-position:center}
+    .badge.bl{top:auto;bottom:6px}
+    .chip{display:inline-block;background:linear-gradient(135deg,#f97316,#dc2626);color:#fff;font-size:10px;font-weight:800;padding:4px 10px;border-radius:20px;margin:2px 0 8px;letter-spacing:.3px;box-shadow:0 2px 8px rgba(220,38,38,.4)}
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="logo.jpg" alt="IELTS REP" />
+        <div class="logo-text">
+          <span class="small">IELTS RECENT EXAM</span>
+          <span class="big">IELTS REP</span>
+        </div>
+      </a>
+      <a href="#payment" class="btn-start" style="padding:8px 16px;font-size:13px;">Prime ৳299</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">REAL EXAM PASSAGES</div>
+      <h1>IELTS RECENT EXAM<br /><span class="orange">EXAM PASSAGE</span></h1>
+      <p>Practice with real IELTS Reading passages from recent exams. Improve your skills, boost your score.</p>
+      <a href="#tests" class="btn-start">▶ Start Practice →</a>
+
+      <div class="features-list">
+        <div><span class="check">✓</span> Recent Exam Reported Passages</div>
+        <div><span class="check">✓</span> IELTS Style Questions</div>
+        <div><span class="check">✓</span> Detailed Answers & Explanation</div>
+        <div><span class="check">✓</span> Track Your Progress</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Tests -->
+  <section class="section" id="tests">
+    <div class="rtabs">
+      <button class="rtab on" id="tabSingle" onclick="setTab('single')">📖 Single Test<small>১টা পেসেজ</small></button>
+      <button class="rtab" id="tabFull" onclick="setTab('full')">🏆 Full Test<small>Recent Exam · ৩টা পেসেজ</small></button>
+    </div>
+    <div class="section-header">
+      <div>
+        <h2 id="secTitle">🔥 Recent Exam Passages</h2>
+        <p id="secSub">১টা পেসেজের Recent Exam টেস্ট।</p>
+      </div>
+    </div>
+    <div class="tests-grid" id="testsGrid"></div>
+  </section>
+
+  <!-- Prime Banner -->
+  <section class="section">
+    <div class="prime-banner">
+      <h3>👑 IELTS REP <span class="orange">PRIME</span></h3>
+      <p class="desc">Unlock the full Reading practice library</p>
+      <div class="prime-checks">
+        <span>✓ All Recent Exam Passages</span>
+        <span>✓ All Full Tests + Single Tests</span>
+        <span>✓ Lifetime Access</span>
+      </div>
+      <div class="price-box">
+        <div class="price">
+          <div class="amount">৳299</div>
+          <div class="label">One Time Payment</div>
+        </div>
+        <a href="#payment" class="btn-unlock">Unlock Prime →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Payment Section -->
+  <section class="section" id="payment">
+    <div class="payment-section">
+      <h2>👑 Get Prime Access — ৳299</h2>
+      <p class="sub">One-time payment · Lifetime access to all tests</p>
+
+      <div class="bangla-box">
+        প্রিমিয়াম অ্যাক্সেস আনলক করতে IELTS REP টিমের সাথে কথা বলুন।<br>
+        ৳২৯৯ দিয়ে সব টেস্ট আনলক করতে পারবেন।
+      </div>
+
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:20px;text-align:center;">
+        <p style="font-size:14px;color:#475569;margin-bottom:8px;">
+          Prime Access পেতে চাইলে নিচের বাটনে ক্লিক করে আমাদের ইমেইল পাঠান।
+        </p>
+        <p style="font-size:13px;color:#64748b;">
+          আমরা আপনার রিকোয়েস্ট দেখে দ্রুত আনলক করে দেব।
+        </p>
+      </div>
+
+      <div style="text-align:center;margin-bottom:20px;">
+        <a href="mailto:ssvaiss64@gmail.com?subject=IELTS%20REP%20-%20Prime%20Access%20Request&body=%E0%A6%86%E0%A6%AE%E0%A6%BF%20IELTS%20REP%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20Prime%20Access%20%28299%20%E0%A6%9F%E0%A6%BE%E0%A6%95%E0%A6%BE%29%20%E0%A6%95%E0%A6%BF%E0%A6%A8%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%85%E0%A6%A8%E0%A7%81%E0%A6%97%E0%A7%8D%E0%A6%B0%E0%A6%B9%20%E0%A6%95%E0%A6%B0%E0%A7%87%20%E0%A6%86%E0%A6%AA%E0%A6%A8%E0%A6%BE%E0%A6%B0%20%E0%A6%AC%E0%A6%BF%E0%A6%95%E0%A6%BE%E0%A6%B6%20%E0%A6%A8%E0%A6%AE%E0%A7%8D%E0%A6%AC%E0%A6%B0%20%E0%A6%A6%E0%A6%BF%E0%A6%A8%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20299%20%E0%A6%9F%E0%A6%BE%E0%A6%95%E0%A6%BE%20%E0%A6%A6%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A7%87%20Prime%20Access%20%E0%A6%86%E0%A6%A8%E0%A6%B2%E0%A6%95%20%E0%A6%95%E0%A6%B0%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%A7%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%BE%E0%A6%A6%E0%A5%A4"
+           style="display:inline-block;background:#16a34a;color:#fff;font-weight:600;padding:14px 28px;border-radius:50px;font-size:15px;box-shadow:0 4px 12px rgba(22,163,74,0.3);">
+          📧 Prime Access এর জন্য ইমেইল পাঠান
+        </a>
+      </div>
+
+      <p style="text-align:center;font-size:12px;color:#94a3b8;margin-bottom:20px;">
+        ইমেইল খুললে মেসেজ অটোমেটিক থাকবে। চাইলে আরও কিছু লিখে পাঠাতে পারবেন।
+      </p>
+
+      </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section">
+    <div class="features-bottom">
+      <div class="feat-item">
+        <div class="icon">🎯</div>
+        <h4>Recent Exam Focus</h4>
+        <p>Practice real exam style passages and questions.</p>
+      </div>
+      <div class="feat-item">
+        <div class="icon">📱</div>
+        <h4>Mobile Friendly</h4>
+        <p>Study anytime, anywhere on any device.</p>
+      </div>
+      <div class="feat-item">
+        <div class="icon">📊</div>
+        <h4>Track Progress</h4>
+        <p>See your score and improve day by day.</p>
+      </div>
+      <div class="feat-item">
+        <div class="icon">🛡️</div>
+        <h4>Secure & Reliable</h4>
+        <p>Your data and payment are 100% safe.</p>
+      </div>
+      <div class="feat-item">
+        <div class="icon">🎧</div>
+        <h4>24/7 Support</h4>
+        <p>We are always here to help you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="logo-f">
+      <img src="logo.jpg" alt="IELTS REP" />
+      <div>
+        <div style="font-size:10px;color:#94a3b8;">IELTS RECENT EXAM</div>
+        <div style="font-weight:700;font-size:13px;color:#fff;">IELTS REP</div>
+      </div>
+    </div>
+    <p>© 2026 IELTS REP. All rights reserved.</p>
+    <p style="margin-top:4px;">Contact: ssvaiss64@gmail.com</p>
+  </footer>
+
+  <script src="data/full.js"></script>
+  <script src="data/single.js"></script>
+  <script>
+    // Cards are loaded from data/full.js and data/single.js (see README.txt)
+    const FULL = window.FULL_TESTS || [];
+    const SINGLE = window.SINGLE_TESTS || [];
+    const pad = n => String(n).padStart(2, "0");
+    let tab = "single";
+
+    function setTab(t) {
+      tab = t;
+      document.getElementById("tabFull").classList.toggle("on", t === "full");
+      document.getElementById("tabSingle").classList.toggle("on", t === "single");
+      render();
+    }
+
+    function lockedBtn() { return '<a href="#payment" class="btn-test btn-locked">🔒 Unlock with Prime</a>'; }
+
+    function render() {
+      const grid = document.getElementById("testsGrid");
+      const title = document.getElementById("secTitle");
+      const sub = document.getElementById("secSub");
+      grid.innerHTML = "";
+      if (tab === "full") {
+        title.textContent = "🏆 Recent Exam Full Tests";
+        sub.textContent = "পুরো IELTS Reading টেস্ট: ৩টা পেসেজ, ৪০টা প্রশ্ন, ৬০ মিনিট।";
+        FULL.forEach(t => {
+          const num = pad(t.n);
+          const card = document.createElement("div");
+          card.className = "test-card fulltest";
+          card.innerHTML = `
+            <div class="test-card-img fullimg" style="background-image:url('cards/full/full-test-${num}.jpg');">
+              <span class="badge bl ${t.free ? 'badge-free' : 'badge-prime'}">${t.free ? 'FREE' : '🔒 PRIME'}</span>
+            </div>
+            <div class="test-card-body">
+              <h3>Full Test ${num}</h3>
+              <span class="chip">🔥 RECENT EXAM TEST</span>
+              <div class="meta">📖 Academic · Reading · 3 Passages<br>⏱ 60 min · 📅 ${t.d}</div>
+              ${t.free ? `<a href="full-test-${num}.html" class="btn-test btn-free">Start Full Test →</a>` : lockedBtn()}
+            </div>`;
+          grid.appendChild(card);
+        });
+      } else {
+        title.textContent = "🔥 Recent Exam Passages";
+        sub.textContent = "১টা পেসেজের Recent Exam টেস্ট।";
+        SINGLE.forEach(t => {
+          const num = pad(t.n);
+          const card = document.createElement("div");
+          card.className = "test-card";
+          card.innerHTML = `
+            <div class="test-card-img" style="background-image:url('cards/single/test-${num}.jpg');background-size:cover;background-position:center;">
+              <span class="badge ${t.free ? 'badge-free' : 'badge-prime'}">${t.free ? 'FREE' : '🔒 PRIME'}</span>
+            </div>
+            <div class="test-card-body">
+              <h3>Test ${num}</h3>
+              <div class="title" style="font-weight:700;color:#0f172a;font-size:12px;">${t.t}</div>
+              <div class="meta">📖 Academic · Reading<br>📊 Medium · 📅 ${t.d}</div>
+              ${t.free ? `<a href="test-${num}.html" class="btn-test btn-free">Start Test →</a>` : lockedBtn()}
+            </div>`;
+          grid.appendChild(card);
+        });
+      }
+    }
+    render();
+  </script>
+</body>
+</html>
